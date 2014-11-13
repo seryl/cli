@@ -16,13 +16,13 @@ var BashCompletionFlag = BoolFlag{
 
 // This flag prints the version for the application
 var VersionFlag = BoolFlag{
-	Name:  "version, v",
+	Name:  "v, version",
 	Usage: "print the version",
 }
 
 // This flag prints the help for all commands and subcommands
 var HelpFlag = BoolFlag{
-	Name:  "help, h",
+	Name:  "h, help",
 	Usage: "show help",
 }
 
