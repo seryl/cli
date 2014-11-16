@@ -35,10 +35,10 @@ var stringFlagTests = []struct {
 	value    string
 	expected string
 }{
-	{"help", "", "--help \t"},
-	{"h", "", "-h \t"},
-	{"h", "", "-h \t"},
-	{"test", "Something", "--test 'Something'\t"},
+	{"help", "", "--help\t\t"},
+	{"h", "", "-h\t\t"},
+	{"h", "", "-h\t\t"},
+	{"test", "Something", "--test\t\t[default: Something]"},
 }
 
 func TestStringFlagHelpOutput(t *testing.T) {
@@ -60,8 +60,8 @@ func TestStringFlagWithEnvVarHelpOutput(t *testing.T) {
 		flag := cli.StringFlag{Name: test.name, Value: test.value, EnvVar: "APP_FOO"}
 		output := flag.String()
 
-		if !strings.HasSuffix(output, " [$APP_FOO]") {
-			t.Errorf("%s does not end with [$APP_FOO]", output)
+		if !strings.HasSuffix(output, " [env: $APP_FOO]") {
+			t.Errorf("%s does not end with [env: $APP_FOO]", output)
 		}
 	}
 }
@@ -112,8 +112,8 @@ func TestStringSliceFlagWithEnvVarHelpOutput(t *testing.T) {
 		flag := cli.StringSliceFlag{Name: test.name, Value: test.value, EnvVar: "APP_QWWX"}
 		output := flag.String()
 
-		if !strings.HasSuffix(output, " [$APP_QWWX]") {
-			t.Errorf("%q does not end with [$APP_QWWX]", output)
+		if !strings.HasSuffix(output, " [env: $APP_QWWX]") {
+			t.Errorf("%q does not end with [env: $APP_QWWX]", output)
 		}
 	}
 }
@@ -122,8 +122,8 @@ var intFlagTests = []struct {
 	name     string
 	expected string
 }{
-	{"help", "--help '0'\t"},
-	{"h", "-h '0'\t"},
+	{"help", "--help\t\t[default: 0]"},
+	{"h", "-h\t\t[default: 0]"},
 }
 
 func TestIntFlagHelpOutput(t *testing.T) {
@@ -145,8 +145,8 @@ func TestIntFlagWithEnvVarHelpOutput(t *testing.T) {
 		flag := cli.IntFlag{Name: test.name, EnvVar: "APP_BAR"}
 		output := flag.String()
 
-		if !strings.HasSuffix(output, " [$APP_BAR]") {
-			t.Errorf("%s does not end with [$APP_BAR]", output)
+		if !strings.HasSuffix(output, " [env: $APP_BAR]") {
+			t.Errorf("%s does not end with [env: $APP_BAR]", output)
 		}
 	}
 }
@@ -155,8 +155,8 @@ var durationFlagTests = []struct {
 	name     string
 	expected string
 }{
-	{"help", "--help '0'\t"},
-	{"h", "-h '0'\t"},
+	{"help", "--help\t\t[default: 0]"},
+	{"h", "-h\t\t[default: 0]"},
 }
 
 func TestDurationFlagHelpOutput(t *testing.T) {
@@ -178,8 +178,8 @@ func TestDurationFlagWithEnvVarHelpOutput(t *testing.T) {
 		flag := cli.DurationFlag{Name: test.name, EnvVar: "APP_BAR"}
 		output := flag.String()
 
-		if !strings.HasSuffix(output, " [$APP_BAR]") {
-			t.Errorf("%s does not end with [$APP_BAR]", output)
+		if !strings.HasSuffix(output, " [env: $APP_BAR]") {
+			t.Errorf("%s does not end with [env: $APP_BAR]", output)
 		}
 	}
 }
@@ -218,8 +218,8 @@ func TestIntSliceFlagWithEnvVarHelpOutput(t *testing.T) {
 		flag := cli.IntSliceFlag{Name: test.name, Value: test.value, EnvVar: "APP_SMURF"}
 		output := flag.String()
 
-		if !strings.HasSuffix(output, " [$APP_SMURF]") {
-			t.Errorf("%q does not end with [$APP_SMURF]", output)
+		if !strings.HasSuffix(output, " [env: $APP_SMURF]") {
+			t.Errorf("%q does not end with [env: $APP_SMURF]", output)
 		}
 	}
 }
@@ -228,8 +228,8 @@ var float64FlagTests = []struct {
 	name     string
 	expected string
 }{
-	{"help", "--help '0'\t"},
-	{"h", "-h '0'\t"},
+	{"help", "--help\t\t[default: 0]"},
+	{"h", "-h\t\t[default: 0]"},
 }
 
 func TestFloat64FlagHelpOutput(t *testing.T) {
@@ -251,8 +251,8 @@ func TestFloat64FlagWithEnvVarHelpOutput(t *testing.T) {
 		flag := cli.Float64Flag{Name: test.name, EnvVar: "APP_BAZ"}
 		output := flag.String()
 
-		if !strings.HasSuffix(output, " [$APP_BAZ]") {
-			t.Errorf("%s does not end with [$APP_BAZ]", output)
+		if !strings.HasSuffix(output, " [env: $APP_BAZ]") {
+			t.Errorf("%s does not end with [env: $APP_BAZ]", output)
 		}
 	}
 }
@@ -286,8 +286,8 @@ func TestGenericFlagWithEnvVarHelpOutput(t *testing.T) {
 		flag := cli.GenericFlag{Name: test.name, EnvVar: "APP_ZAP"}
 		output := flag.String()
 
-		if !strings.HasSuffix(output, " [$APP_ZAP]") {
-			t.Errorf("%s does not end with [$APP_ZAP]", output)
+		if !strings.HasSuffix(output, " [env: $APP_ZAP]") {
+			t.Errorf("%s does not end with [env: $APP_ZAP]", output)
 		}
 	}
 }
