@@ -16,13 +16,13 @@ var BashCompletionFlag = BoolFlag{
 
 // This flag prints the version for the application
 var VersionFlag = BoolFlag{
-	Name:  "version, v",
+	Name:  "v, version",
 	Usage: "print the version",
 }
 
 // This flag prints the help for all commands and subcommands
 var HelpFlag = BoolFlag{
-	Name:  "help, h",
+	Name:  "h, help",
 	Usage: "show help",
 }
 
@@ -262,15 +262,15 @@ type StringFlag struct {
 
 func (f StringFlag) String() string {
 	var fmtString string
-	fmtString = "%s %v\t%v"
+	fmtString = "%s\t%v\t%v"
 
 	if len(f.Value) > 0 {
-		fmtString = "%s '%v'\t%v"
+		fmtString = "%s\t%v\t[default: %v]"
 	} else {
-		fmtString = "%s %v\t%v"
+		fmtString = "%s\t%v\t%v"
 	}
 
-	return withEnvHint(f.EnvVar, fmt.Sprintf(fmtString, prefixedNames(f.Name), f.Value, f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf(fmtString, prefixedNames(f.Name), f.Usage, f.Value))
 }
 
 func (f StringFlag) Apply(set *flag.FlagSet) {
@@ -297,7 +297,7 @@ type IntFlag struct {
 }
 
 func (f IntFlag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s '%v'\t%v", prefixedNames(f.Name), f.Value, f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s\t%v\t[default: %v]", prefixedNames(f.Name), f.Usage, f.Value))
 }
 
 func (f IntFlag) Apply(set *flag.FlagSet) {
@@ -327,7 +327,7 @@ type DurationFlag struct {
 }
 
 func (f DurationFlag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s '%v'\t%v", prefixedNames(f.Name), f.Value, f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s\t%v\t[default: %v]", prefixedNames(f.Name), f.Usage, f.Value))
 }
 
 func (f DurationFlag) Apply(set *flag.FlagSet) {
@@ -357,7 +357,7 @@ type Float64Flag struct {
 }
 
 func (f Float64Flag) String() string {
-	return withEnvHint(f.EnvVar, fmt.Sprintf("%s '%v'\t%v", prefixedNames(f.Name), f.Value, f.Usage))
+	return withEnvHint(f.EnvVar, fmt.Sprintf("%s\t%v\t[default: %v]", prefixedNames(f.Name), f.Usage, f.Value))
 }
 
 func (f Float64Flag) Apply(set *flag.FlagSet) {
@@ -404,7 +404,7 @@ func prefixedNames(fullName string) (prefixed string) {
 func withEnvHint(envVar, str string) string {
 	envText := ""
 	if envVar != "" {
-		envText = fmt.Sprintf(" [$%s]", envVar)
+		envText = fmt.Sprintf(" [env: $%s]", envVar)
 	}
 	return str + envText
 }
