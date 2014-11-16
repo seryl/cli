@@ -1,5 +1,11 @@
 [![Build Status](https://travis-ci.org/seryl/cli.png?branch=master)](https://travis-ci.org/seryl/cli)
 
+Note: This is a modified version of cli that has three display defaults changed.
+
+* Preferred ordering of options is shortname, fullname (To fix alignment issues)
+* Default variables are displayed as `[default: %v]` instead of `'%v'`
+* Environment variables are displayed as `[env: %v]` instead of `[%v]`
+
 # cli.go
 cli.go is simple, fast, and fun package for building command line apps in Go. The goal is to enable developers to write fast and distributable command line applications in an expressive way.
 
@@ -25,7 +31,7 @@ export PATH=$PATH:$GOPATH/bin
 ```
 
 ## Getting Started
-One of the philosophies behind cli.go is that an API should be playful and full of discovery. So a cli.go app can be as little as one line of code in `main()`. 
+One of the philosophies behind cli.go is that an API should be playful and full of discovery. So a cli.go app can be as little as one line of code in `main()`.
 
 ``` go
 package main
@@ -57,7 +63,7 @@ func main() {
   app.Action = func(c *cli.Context) {
     println("boom! I say!")
   }
-  
+
   app.Run(os.Args)
 }
 ```
@@ -231,7 +237,7 @@ app.Commands = []cli.Command{
         },
       },
     },
-  },     
+  },
 }
 ...
 ```
