@@ -68,7 +68,7 @@ OPTIONS:
 var helpCommand = Command{
 	Name:      "help",
 	ShortName: "h",
-	Usage:     "Shows a list of commands or help for one command",
+	Usage:     "shows a list of commands or help for one command",
 	Action: func(c *Context) {
 		args := c.Args()
 		if args.Present() {
@@ -82,7 +82,7 @@ var helpCommand = Command{
 var helpSubcommand = Command{
 	Name:      "help",
 	ShortName: "h",
-	Usage:     "Shows a list of commands or help for one command",
+	Usage:     "shows a list of commands or help for one command",
 	Action: func(c *Context) {
 		args := c.Args()
 		if args.Present() {
